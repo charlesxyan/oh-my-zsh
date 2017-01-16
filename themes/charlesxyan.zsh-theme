@@ -24,8 +24,10 @@
 # The prompt
 local git_branch='%{$fg[magenta]%}$(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%}'
 
+#PROMPT="%{$fg_bold[green]%}╭─%n@%m %{$reset_color%}in %{$fg_bold[yellow]%}%~ %{$reset_color%}${git_branch}
+#%{$fg_bold[green]%}╰\$ %{$reset_color%}"
 PROMPT="%{$fg_bold[green]%}╭─%n@%m %{$reset_color%}in %{$fg_bold[yellow]%}%~ %{$reset_color%}${git_branch}
-%{$fg_bold[green]%}╰\$ %{$reset_color%}"
+%{$fg_bold[green]%}╰─\$ %{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_REMOTE_STATUS_DETAILED=true
 ZSH_THEME_GIT_PROMPT_REMOTE_STATUS_PREFIX="%{$fg[yellow]%}("
