@@ -24,7 +24,22 @@
 # The prompt
 local git_branch='%{$fg[magenta]%}$(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%}'
 
-PROMPT="%{$fg_bold[cyan]%}╭─%{$fg_bold[red]%} %{$reset_color%}in %{$fg_bold[yellow]%}%~ %{$reset_color%}${git_branch}
+function local_ssh_prompt() {
+    if [[ -n $SSH_CONNECTION ]] || [[ $UID -eq 0 ]]; then
+        if [[ $UID -eq 0 ]]; then
+            echo "%{$fg_bold[red]%}%n@$(hostname -f) %~%{$reset_color%} "
+        else
+            echo "%{$fg_bold[yellow]%}%n@$(hostname -f) %~%{$reset_color%} "
+        fi
+    else
+        echo "%{$fg_bold[yellow]%}%~"
+    fi
+}
+
+#PROMPT="%{$fg_bold[cyan]%}╭─%{$fg_bold[red]%} %{$reset_color%}in %{$fg_bold[yellow]%}%~ %{$reset_color%}${git_branch}
+#%{$fg_bold[cyan]%}╰─$ %{$reset_color%}"
+
+PROMPT="%{$fg_bold[cyan]%}╭─%{$fg_bold[red]%} %{$reset_color%}in $(local_ssh_prompt) %{$reset_color%}${git_branch}
 %{$fg_bold[cyan]%}╰─$ %{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_REMOTE_STATUS_DETAILED=true
