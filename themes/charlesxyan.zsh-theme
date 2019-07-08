@@ -39,8 +39,13 @@ function local_ssh_prompt() {
 #PROMPT="%{$fg_bold[cyan]%}╭─%{$fg_bold[red]%} %{$reset_color%}in %{$fg_bold[yellow]%}%~ %{$reset_color%}${git_branch}
 #%{$fg_bold[cyan]%}╰─$ %{$reset_color%}"
 
-PROMPT="%{$fg_bold[cyan]%}╭─%{$fg_bold[red]%} %{$reset_color%}in $(local_ssh_prompt) %{$reset_color%}${git_branch}
-%{$fg_bold[cyan]%}╰─$ %{$reset_color%}"
+## last good
+#PROMPT="%{$fg_bold[cyan]%}╭─%{$fg_bold[red]%} %{$reset_color%}in $(local_ssh_prompt) %{$reset_color%}${git_branch}
+#%{$fg_bold[cyan]%}╰─$ %{$reset_color%}"
+
+PROMPT="%{$fg_bold[cyan]%}%{$fg_bold[red]%}%{$reset_color%}in $(local_ssh_prompt) %{$reset_color%}${git_branch}
+%{$fg_bold[cyan]%}$ %{$reset_color%}"
+
 
 ZSH_THEME_GIT_PROMPT_REMOTE_STATUS_DETAILED=true
 ZSH_THEME_GIT_PROMPT_REMOTE_STATUS_PREFIX="%{$fg[yellow]%}("
