@@ -29,7 +29,7 @@ function local_ssh_prompt() {
         if [[ $UID -eq 0 ]]; then
             echo "%{$fg_bold[red]%}%n@$(hostname -f) %~%{$reset_color%} "
         else
-            echo "%{$fg_bold[cyan]%}%n@$(hostname -f) %~%{$reset_color%} "
+            echo "%{$fg_bold[magenta]%}%n@$(hostname -f) %~%{$reset_color%} "
         fi
     else
         echo "%{$fg_bold[yellow]%}%~"
