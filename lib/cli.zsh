@@ -376,16 +376,24 @@ function _omz::theme::use {
 
 function _omz::update {
   # Run update script
-  env ZSH="$ZSH" zsh -f "$ZSH/tools/upgrade.sh"
+  if [[ "$1" != --unattended ]]; then
+    ZSH="$ZSH" zsh -f "$ZSH/tools/upgrade.sh" --interactive
+  else
+    ZSH="$ZSH" zsh -f "$ZSH/tools/upgrade.sh"
+  fi
   local ret=$?
+
   # Update last updated file
   zmodload zsh/datetime
   echo "LAST_EPOCH=$(( EPOCHSECONDS / 60 / 60 / 24 ))" >! "${ZSH_CACHE_DIR}/.zsh-update"
   # Remove update lock if it exists
   command rm -rf "$ZSH/log/update.lock"
+
   # Restart the zsh session
   if [[ $ret -eq 0 && "$1" != --unattended ]]; then
+    # Old zsh versions don't have ZSH_ARGZERO
+    local zsh="${ZSH_ARGZERO:-${functrace[-1]%:*}}"
     # Check whether to run a login shell
-    [[ "$ZSH_ARGZERO" = -* ]] && exec -l "${ZSH_ARGZERO#-}" || exec "$ZSH_ARGZERO"
+    [[ "$zsh" = -* || -o login ]] && exec -l "${zsh#-}" || exec "$zsh"
   fi
 }
